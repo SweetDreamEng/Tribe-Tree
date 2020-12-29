@@ -1,0 +1,217 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap');
+
+@font-face {
+    font-family: 'HSN Ibtisam';
+    src: url('hsn-ibtisam.ttf');
+  }
+
+  body, .__nuxt{
+    font-family: 'Open Sans', sans-serif;
+  }
+  .ar-font{
+    font-family: 'HSN Ibtisam', sans-serif
+  }
+  .text-ar .l{
+    font-family: 'HSN Ibtisam', sans-serif
+  }
+  *{
+    // line-height: 24px;
+  }
+
+  .t1 table {
+    width: 100%;
+    text-align: center;
+ }
+  .t1 table th, .t1 table td {
+    padding: 15px;
+ }
+  .t1 table th {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+ }
+  .t1 table tr {
+    @apply cursor-pointer;
+ }
+  .t1 table tr:hover {
+    @apply bg-lgrey;
+ }
+  .container{
+    // padding: 4rem 20px;
+    padding: 4rem;
+    box-sizing: border-box;
+  }
+  .h-container{
+    padding: 0 40px;
+    max-width: 1700px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .page-title{
+    @apply text-5xl font-light text-dark;
+  }
+  .inp{
+    @apply text-theme rounded px-5 py-2 bg-grey border-grey border-solid border-2;
+  }
+  .inp:focus{
+    @apply outline-none bg-lgrey;
+  }
+  .inp::placeholder{
+      color: #649569;
+  }
+  .btn{
+      @apply text-theme2 font-semibold border-theme2 border-2 border-solid rounded px-6 py-2 cursor-pointer;
+      background: none;
+  }
+  .btn:hover{
+      @apply bg-theme2 text-grey;
+  }
+  .btn:focus{
+      @apply bg-theme text-grey outline-none border-theme;
+  }
+  .btn-danger{
+    @apply border-red2 text-red;
+  }
+  .btn-danger:hover{
+    @apply bg-red;
+  }
+  .btn-danger:focus{
+    @apply bg-red2
+  }
+
+ .v-offset{
+   margin-top: 80px;
+ }
+ .v-container{
+   padding-top: 140px;
+  //  max-height: calc(100vh - 100px);
+  //  overflow-y: scroll;
+ }
+ .border-box {
+  box-sizing: border-box;
+}
+.content-box {
+  box-sizing: content-box;
+}
+
+
+// .t1{
+//   table{
+//     width: 100%;
+//     text-align: center;
+//     // border-collapse: separate;
+//     th, td {
+//         // border: 1px solid rgba(black, 0.1);
+//         padding: 15px;
+//     }
+//     th{
+//         border-bottom: 1px solid rgba(black, 0.5)
+//     }
+//     tr{
+//         @apply cursor-pointer;
+//         &:hover{
+//             @apply bg-lgrey;
+//         }
+//     }
+//   }
+// }
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #e4e4e4;
+  border-radius: 3px;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(194, 194, 194);
+  border-radius: 3px;
+
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(145, 145, 145);
+}
+
+html{
+  line-height: 1.5 !important;
+}
+
+.modalContainer{
+  background: rgba(0, 0, 0, 0.3)
+}
+.modal{
+  background: #FAF8F4;
+}
+
+
+.editTribe label, .bio label{
+  @apply opacity-50 italic;
+}
+
+.editTribe .inp, .bio .inp{
+  margin-bottom: 20px;
+}
+
+.w-500p{
+  width: 500px;
+}
+
+.editTribe .inp:disabled, .bio .inp:disabled{
+    color: #666;
+    background: #eee;
+}
+
+.page-enter-active, .page-leave-active {
+  transition: all .15s ease-out;
+}
+.page-enter, .page-leave-active {
+  opacity: 0;
+  // transform-origin: 50% 50%;
+}
+// .back-enter-active, .back-leave-active {
+//   transition: all .15s ease-out;
+// }
+// .back-enter {
+//   transition-delay: 1s;
+// } 
+// .back-enter, .back-leave-active {
+//   opacity: 0;
+//   // transform-origin: 50% 50%;
+// }
+
+@media only screen and (max-width: 1300px){
+  html, body{
+    font-size: 14px !important;
+  }
+}
+@media only screen and (max-width: 800px){
+  .h-container{
+    padding: 0 20px;
+    padding-top: 140px;
+  }
+}
+
+.nav a {
+	color: #709E73;
+}
+
+.nav a:hover, .nav a.nuxt-link-exact-active {
+	color: #05560D;
+}
+
+.nav a.nuxt-link-exact-active:hover {
+	cursor: initial;
+}
+
+.t1{
+  margin: 50px
+}
