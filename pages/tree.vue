@@ -461,7 +461,7 @@ export default {
       this.yM = Math.floor(Math.sqrt(yM * 2));
 
       var calcY = (year) => {
-        return (year - this.activeDateRange[0]) * yM;
+        return ((year - this.activeDateRange[0]) * yM) / 2;
       };
       var calcX = (x) => {
         return x - 125;
@@ -472,7 +472,7 @@ export default {
           return calcX(d.x);
         })
         .y(function(d) {
-          return calcY(d.data.year);
+          return calcY(d.y);
         });
       var horizontal = d3
         .linkHorizontal()
@@ -480,15 +480,15 @@ export default {
           return calcX(d.x);
         })
         .y(function(d) {
-          return calcY(d.data.year);
+          return calcY(d.y);
         });
 
       var node = d3
         .select("#tree1 g.nodes")
         .selectAll("g.node")
-        // .attr('transform', (d)=>{return `translate(${calcX(d.x)},${calcY(d.data.year)}) ${(!d.parent)?'scale(1.4)':''}`})
+        // .attr('transform', (d)=>{return `translate(${calcX(d.x)},${calcY(d.y)}) ${(!d.parent)?'scale(1.4)':''}`})
         .attr("transform", (d) => {
-          return `translate(${calcX(d.x)},${calcY(d.data.year)}) ${
+          return `translate(${calcX(d.x)},${calcY(d.y)}) ${
             !d.parent ? "scale(1.4)" : ""
           }`;
         });
@@ -644,9 +644,10 @@ export default {
       // Calculate y value from node year:
       var calcY = (year) => {
         return (
-          (year - this.activeDateRange[0]) *
-          (this.$refs.timeline.$el.getBoundingClientRect().height /
-            (this.activeDateRange[1] - this.activeDateRange[0]))
+          ((year - this.activeDateRange[0]) *
+            (this.$refs.timeline.$el.getBoundingClientRect().height /
+              (this.activeDateRange[1] - this.activeDateRange[0]))) /
+          2
         );
       };
 
@@ -693,7 +694,7 @@ export default {
           }
           d.data.x0 = d.x;
 
-          return `translate(${calcX(d.data.x0)},${calcY(d.data.year)}) ${
+          return `translate(${calcX(d.data.x0)},${calcY(d.y)}) ${
             !d.parent ? "scale(1.4)" : ""
           }`;
         }) //Make root node bigger
@@ -786,7 +787,7 @@ export default {
           }
           d.data.x0 = d.x;
 
-          return `translate(-5, 0)`;
+          return `translate(-2, 0)`;
         })
         .attr("width", "20px");
       name
@@ -883,7 +884,7 @@ export default {
           return calcX(d.x);
         })
         .y(function(d) {
-          return calcY(d.data.year);
+          return calcY(d.y);
         });
       var horizontal = d3
         .linkHorizontal()
@@ -891,7 +892,7 @@ export default {
           return calcX(d.x);
         })
         .y(function(d) {
-          return calcY(d.data.year);
+          return calcY(d.y);
         });
 
       //Add marriage link -
