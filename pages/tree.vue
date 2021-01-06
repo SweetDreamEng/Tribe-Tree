@@ -402,7 +402,7 @@ export default {
     cursorLine() {
       return `transform: translateY(${this.yParent -
         140}px) translateZ(0) translate3d(0, 0, 0);`;
-      // return `transform: translateY(${this.yChild - 10}px) translateZ(0) translate3d(0, 0, 0);`
+      // return `transform: translateY(${this.yChild - 20}px) translateZ(0) translate3d(0, 0, 0);`
     },
     tree2Height() {
       var h = this.$refs.svg1.getBoundingClientRect().height,
@@ -472,7 +472,7 @@ export default {
           return calcX(d.x);
         })
         .y(function(d) {
-          return calcY(d.y);
+          return d.data.category ? calcY(d.y) - 20 : calcY(d.y);
         });
       var horizontal = d3
         .linkHorizontal()
@@ -480,7 +480,7 @@ export default {
           return calcX(d.x);
         })
         .y(function(d) {
-          return calcY(d.y);
+          return d.data.category ? calcY(d.y) - 20 : calcY(d.y);
         });
 
       var node = d3
@@ -488,9 +488,9 @@ export default {
         .selectAll("g.node")
         // .attr('transform', (d)=>{return `translate(${calcX(d.x)},${calcY(d.y)}) ${(!d.parent)?'scale(1.4)':''}`})
         .attr("transform", (d) => {
-          return `translate(${calcX(d.x)},${calcY(d.y)}) ${
-            !d.parent ? "scale(1.4)" : ""
-          }`;
+          return `translate(${calcX(d.x)},${
+            d.data.category ? calcY(d.y) - 20 : calcY(d.y)
+          }) ${!d.parent ? "scale(1.4)" : ""}`;
         });
       var links = d3
         .select("#tree1 g.links")
@@ -530,11 +530,11 @@ export default {
         const marriage_link = d3.linkHorizontal()({
           source: [
             calcX(linkData[link.source].target.x),
-            calcY(linkData[link.source].target.data.year),
+            calcY(linkData[link.source].target.y) - 20,
           ],
           target: [
             calcX(linkData[link.target].target.x),
-            calcY(linkData[link.target].target.data.year),
+            calcY(linkData[link.target].target.y),
           ],
         });
 
@@ -694,9 +694,9 @@ export default {
           }
           d.data.x0 = d.x;
 
-          return `translate(${calcX(d.data.x0)},${calcY(d.y)}) ${
-            !d.parent ? "scale(1.4)" : ""
-          }`;
+          return `translate(${calcX(d.data.x0)},${
+            d.data.category ? calcY(d.y) - 20 : calcY(d.y)
+          }) ${!d.parent ? "scale(1.4)" : ""}`;
         }) //Make root node bigger
         // Pointer events:
         .on("mouseover", (d) => {
@@ -884,7 +884,7 @@ export default {
           return calcX(d.x);
         })
         .y(function(d) {
-          return calcY(d.y);
+          return d.data.category ? calcY(d.y) - 20 : calcY(d.y);
         });
       var horizontal = d3
         .linkHorizontal()
@@ -892,7 +892,7 @@ export default {
           return calcX(d.x);
         })
         .y(function(d) {
-          return calcY(d.y);
+          return d.data.category ? calcY(d.y) - 20 : calcY(d.y);
         });
 
       //Add marriage link -
@@ -939,11 +939,11 @@ export default {
         const marriage_link = d3.linkHorizontal()({
           source: [
             calcX(linkData[link.source].target.x),
-            calcY(linkData[link.source].target.data.year),
+            calcY(linkData[link.source].target.y) - 20,
           ],
           target: [
             calcX(linkData[link.target].target.x),
-            calcY(linkData[link.target].target.data.year),
+            calcY(linkData[link.target].target.y),
           ],
         });
 
@@ -1020,8 +1020,8 @@ export default {
       //       // x12 = anc[i].x + anc[i].r; //x end point
       //       // y12 = anc[i].y + anc[i].r; //y end point
 
-      //       x11 = lab[i].x - 10; //x start point
-      //       y11 = lab[i].y - 10; //y start point
+      //       x11 = lab[i].x - 20; //x start point
+      //       y11 = lab[i].y - 20; //y start point
       //       x12 = lab[i].x + 10; //x end point
       //       y12 = lab[i].y + 10; //y end point
       //       x_overlap = Math.max(0, Math.min(x12, x22) - Math.max(x11, x21));
@@ -1708,6 +1708,10 @@ img.progeny-description {
   }
 }
 
+.marriage-link {
+  stroke: #ff5500;
+}
+
 .node {
   &:hover,
   &.active {
@@ -1937,6 +1941,11 @@ img.progeny-description {
 
   &.toNr {
     stroke: rgba(#919191, 0.4);
+    stroke-opacity: 0;
+  }
+
+  &.marriage {
+    stroke: #ff5500;
     stroke-opacity: 0;
   }
 }
