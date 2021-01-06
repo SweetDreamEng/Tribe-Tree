@@ -786,7 +786,7 @@ export default {
           }
           d.data.x0 = d.x;
 
-          return `translate(0, 0)`;
+          return `translate(-5, 0)`;
         })
         .attr("width", "20px");
       name
