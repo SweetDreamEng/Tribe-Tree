@@ -461,7 +461,7 @@ export default {
       this.yM = Math.floor(Math.sqrt(yM * 2));
 
       var calcY = (year) => {
-        return ((year - this.activeDateRange[0]) * yM) / 2;
+        return ((year - 500 - this.activeDateRange[0]) * yM) / 2;
       };
       var calcX = (x) => {
         return x - 125;
@@ -643,7 +643,7 @@ export default {
       // Calculate y value from node year:
       var calcY = (year) => {
         return (
-          ((year - this.activeDateRange[0]) *
+          ((year - 500 - this.activeDateRange[0]) *
             (this.$refs.timeline.$el.getBoundingClientRect().height /
               (this.activeDateRange[1] - this.activeDateRange[0]))) /
           2
@@ -775,10 +775,13 @@ export default {
           .selectAll("*")
           .remove();
 
-        d3.tree().size([
-          this.$refs.treeGrp.getBoundingClientRect().width,
-          this.$refs.treeGrp.getBoundingClientRect().height + flag * 300,
-        ]);
+        // d3.tree().size([1000, 400 + flag * 300]);
+        // d3.tree().size(1000, 1000);
+        // d3.select("#walnut_graph svg")
+        //   .attr("width", 1000)
+        //   .attr("height", 600);
+        // console.log("dddd");
+        // console.log(d3.tree().size());
         this.redraw(treeLayout);
       });
 
@@ -1164,7 +1167,7 @@ export default {
     initTree1() {
       //Process data structure
       var treeLayout = d3.tree();
-      treeLayout.size([1000, 400]);
+      treeLayout.size([1000, 1500]);
       var collapse = (d) => {
         if (d.children) {
           d._children = d.children;
