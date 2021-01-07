@@ -640,7 +640,6 @@ export default {
       var vOffset = 10;
       var labelArray = [];
       this.root = tree;
-
       // Calculate y value from node year:
       var calcY = (year) => {
         return (
@@ -756,12 +755,15 @@ export default {
           d._children = null;
         }
 
+        var flag = 0;
         if (d.data.children) {
           d.data._children = d.data.children;
           d.data.children = null;
+          flag--;
         } else {
           d.data.children = d.data._children;
           d.data._children = null;
+          flag++;
         }
         /// remove all nodes and links
 
@@ -773,6 +775,10 @@ export default {
           .selectAll("*")
           .remove();
 
+        d3.tree().size([
+          this.$refs.treeGrp.getBoundingClientRect().width,
+          this.$refs.treeGrp.getBoundingClientRect().height + flag * 300,
+        ]);
         this.redraw(treeLayout);
       });
 
